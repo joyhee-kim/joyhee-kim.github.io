@@ -1,7 +1,5 @@
 # sohee-kim.github.io
 
-A lightweight academic homepage for GitHub Pages, inspired by the structure of `akatigre.github.io` (profile sidebar + long-form academic CV sections), but implemented as a simple static site so it is easy to edit.
-
 ## Files
 
 ```text
