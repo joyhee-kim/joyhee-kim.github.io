@@ -3,36 +3,416 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sohee Kim — Ph.D. candidate in Artificial Intelligence at KAIST. Research on 3D representation learning, trustworthy vision-language models, and spatial & physical intelligence." />
-  <meta name="theme-color" content="#faf9f7" />
+  <meta name="description" content="Sohee Kim — Ph.D. candidate in Artificial Intelligence at KAIST. Research on multimodal reasoning, visual and spatial intelligence, and agentic multimodal refinement." />
+  <meta name="theme-color" content="#fffafa" />
   <title>Sohee Kim</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    :root {
+      --accent: #c84f7b;
+      --accent-dark: #a83f68;
+      --accent-soft: #f8e8ee;
+      --text: #494949;
+      --text-dark: #222222;
+      --muted: #777777;
+      --line: #e8e8e8;
+      --bg: #ffffff;
+      --sidebar-width: 232px;
+      --content-width: 650px;
+      --wrapper-width: 960px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { color: var(--accent-dark); }
+
+    strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .skip-link:focus {
+      left: 12px;
+      top: 12px;
+      width: auto;
+      height: auto;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      z-index: 1000;
+    }
+
+    .wrapper {
+      width: var(--wrapper-width);
+      margin: 0 auto;
+    }
+
+    /* ===== Left profile: Minimal-Light inspired ===== */
+    .profile {
+      width: var(--sidebar-width);
+      position: fixed;
+      padding-top: 4rem;
+      text-align: center;
+    }
+
+    .avatar {
+      display: block;
+      width: 145px;
+      height: 145px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05);
+    }
+
+    .profile h1 {
+      margin: 0 0 9px;
+      color: var(--accent-dark);
+      font-size: 28px;
+      line-height: 1.15;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .position {
+      margin: 0;
+      color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
+    .affiliation {
+      display: inline-block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .location {
+      margin: 7px 0 0;
+      color: #969696;
+      font-size: 13px;
+    }
+
+    .email {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 5px 12px;
+      margin-top: 18px;
+      font-size: 13px;
+    }
+
+    .social-links a {
+      position: relative;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .social-links a:hover { color: var(--accent-dark); }
+
+    .mini-nav {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 12px;
+    }
+
+    .mini-nav a {
+      color: #8a8a8a;
+    }
+
+    .mini-nav a:hover { color: var(--accent); }
+
+    /* ===== Main content ===== */
+    main {
+      width: var(--content-width);
+      float: right;
+      padding-top: 4rem;
+      padding-bottom: 50px;
+    }
+
+    section {
+      margin: 0 0 42px;
+    }
+
+    h2 {
+      color: var(--accent-dark);
+      font-size: 23px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 0 0 18px;
+    }
+
+    h3 {
+      color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    p { margin: 0 0 16px; }
+
+    .lead {
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .research-interests {
+      margin-top: 18px;
+      padding: 11px 14px;
+      border-left: 3px solid var(--accent);
+      background: #fffafb;
+      font-size: 14px;
+      color: #5d5d5d;
+    }
+
+    .research-interests strong { color: var(--accent-dark); }
+
+    .section-rule {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 0 0 38px;
+    }
+
+    /* Publications */
+    .publication {
+      padding: 0 0 19px;
+      margin: 0 0 19px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .publication:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .venue {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .pub-title {
+      display: inline;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .pub-title:hover { color: var(--accent-dark); }
+
+    .authors {
+      margin: 5px 0 0;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .note {
+      color: #989898;
+      font-size: 12px;
+    }
+
+    .pub-note {
+      margin: 5px 0 0;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .pub-links {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .pub-links a {
+      margin-right: 12px;
+      font-weight: 500;
+    }
+
+    /* Experience / education / awards */
+    .row-list {
+      margin: 0;
+      padding: 0;
+    }
+
+    .row-item {
+      display: grid;
+      grid-template-columns: 145px minmax(0, 1fr);
+      gap: 18px;
+      padding: 0 0 22px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .row-item:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .row-date {
+      color: var(--accent);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .row-body h3 { margin-bottom: 3px; }
+
+    .subtitle {
+      margin: 0 0 4px;
+      color: #555;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .detail {
+      margin: 0;
+      color: #6c6c6c;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .detail + .detail { margin-top: 2px; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: #9a9a9a;
+      font-size: 12px;
+    }
+
+    footer p { margin: 0; }
+
+    /* ===== Responsive ===== */
+    @media screen and (max-width: 960px) {
+      body { padding: 22px; }
+
+      .wrapper {
+        width: auto;
+        max-width: 760px;
+      }
+
+      .profile,
+      main {
+        float: none;
+        position: static;
+        width: auto;
+      }
+
+      .profile {
+        padding-top: 10px;
+        padding-bottom: 30px;
+      }
+
+      .mini-nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      main {
+        padding-top: 28px;
+        border-top: 1px solid var(--line);
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      body { padding: 16px; }
+      .avatar { width: 118px; height: 118px; }
+      .profile h1 { font-size: 25px; }
+      h2 { font-size: 21px; }
+
+      .row-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .row-date { margin-bottom: 1px; }
+    }
+
+    @media print {
+      body { font-size: 12pt; }
+      .wrapper { width: auto; }
+      .profile, main { position: static; float: none; width: auto; }
+      .mini-nav { display: none; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="site-shell">
-    <aside class="sidebar" aria-label="Profile">
-      <div class="profile-card">
-        <a class="avatar-wrap" href="#about" aria-label="Go to About">
-          <img class="avatar" src="assets/img/sohee_photo.jpg" alt="Portrait of Sohee Kim" />
-        </a>
+  <div class="wrapper">
+    <aside class="profile" aria-label="Profile">
+      <a href="#about" aria-label="Go to About">
+        <img class="avatar" src="assets/img/sohee_photo.jpg" alt="Portrait of Sohee Kim" />
+      </a>
 
-        <!-- EDIT: name / one-line role -->
-        <h1 class="profile-name">Sohee Kim</h1>
-        <p class="profile-role">Ph.D. Candidate in Artificial Intelligence at KAIST</p>
-        <p class="profile-meta">Seoul, Republic of Korea</p>
+      <h1>Sohee Kim</h1>
+      <p class="position">Ph.D. Candidate in Artificial Intelligence</p>
+      <a class="affiliation" href="https://mli.kaist.ac.kr/" target="_blank" rel="noopener">
+        Graduate School of AI, KAIST<br />Machine Learning and Intelligence Lab
+      </a>
+      <p class="location">Seoul, Republic of Korea</p>
+      <a class="email" href="mailto:joyhee@mli.kaist.ac.kr">joyhee@mli.kaist.ac.kr</a>
 
-        <div class="profile-links" aria-label="Profile links">
-          <a href="mailto:joyhee@mli.kaist.ac.kr">Email</a>
-          <a href="assets/cv/Sohee_Kim_CV.pdf" target="_blank" rel="noopener">CV</a>
-          <!-- EDIT: Replace # with your real links when ready. -->
-          <a class="muted-link" href="https://www.linkedin.com/in/sohee-kim-b52098276/" data-placeholder-link>LinkedIn</a>
-          <a class="muted-link" href="https://scholar.google.com/citations?user=xLl9BJAAAAAJ&hl=en" data-placeholder-link>Google Scholar</a>
-        </div>
+      <div class="social-links" aria-label="Profile links">
+        <a href="assets/cv/Sohee_Kim_CV.pdf" target="_blank" rel="noopener">CV</a>
+        <a href="https://scholar.google.com/citations?user=xLl9BJAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://www.linkedin.com/in/sohee-kim-b52098276/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
 
-      <nav class="section-nav" aria-label="Section navigation">
+      <nav class="mini-nav" aria-label="Section navigation">
         <a href="#about">About</a>
         <a href="#publications">Publications</a>
         <a href="#projects">Industry Projects</a>
@@ -41,17 +421,14 @@
       </nav>
     </aside>
 
-    <main id="main" class="content">
-      <section id="about" class="section hero-section">
-        <p class="eyebrow">About Me</p>
-      
+    <main id="main">
+      <section id="about">
+        <h2>About Me</h2>
         <p class="lead">
           I am a Ph.D. candidate at the <strong>Graduate School of AI, KAIST</strong>, advised by Prof. Eunho Yang in the
-          <a class="text-link" href="https://mli.kaist.ac.kr/" target="_blank" rel="noopener">
-            Machine Learning and Intelligence Lab
-          </a>.
+          <a href="https://mli.kaist.ac.kr/" target="_blank" rel="noopener">Machine Learning and Intelligence Lab</a>.
         </p>
-      
+
         <p>
           My research focuses on <strong>multimodal reasoning and capability improvement</strong>,
           with the goal of building models that can better understand visual information,
@@ -63,181 +440,176 @@
           where vision-language models evaluate generated videos, diagnose failures,
           and iteratively improve the generation process based on previous interaction and evaluation history.
         </p>
-      
-        <div class="interest-chips" aria-label="Research interests">
-          <span>Multimodal Reasoning</span>
-          <span>Visual & Spatial Intelligence</span>
-          <span>Agentic VLMs</span>
+
+        <div class="research-interests">
+          <strong>Research Interests:</strong>
+          Multimodal Reasoning · Visual &amp; Spatial Intelligence · Agentic VLMs
         </div>
       </section>
 
-      <section id="publications" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Research</p>
-          <h2>Publications &amp; Preprints</h2>
-        </div>
+      <hr class="section-rule" />
 
-        <article class="pub-card">
-          <div class="pub-venue">EMNLP 2025</div>
+      <section id="publications">
+        <h2>Publications &amp; Preprints</h2>
+
+        <article class="publication">
+          <div class="venue">EMNLP 2025</div>
           <h3>
-            <a class="pub-title-link" href="https://aclanthology.org/2025.emnlp-main.1092/" target="_blank" rel="noopener">
+            <a class="pub-title" href="https://aclanthology.org/2025.emnlp-main.1092/" target="_blank" rel="noopener">
               Unveiling the Response of Large Vision-Language Models to Visually Absent Tokens
             </a>
           </h3>
           <p class="authors"><strong>Sohee Kim*</strong>, Soohyun Ryu*, Joonghyung Park, Eunho Yang <span class="note">(* equal contribution)</span></p>
           <div class="pub-links">
-            <a href="https://aclanthology.org/2025.emnlp-main.1092/" target="_blank" rel="noopener">Paper ↗</a>
-          </div>
-        </article>
-        <article class="pub-card">
-          <div class="pub-venue">Under Review</div>
-          <h3>
-            <a class="pub-title-link" href="https://arxiv.org/abs/2609.07064" target="_blank" rel="noopener">
-              SpatialBlock: Enhancing Spatial Intelligence in LVLMs via Synthetic Block-Stacking Problem
-            </a>
-          </h3>
-          <p class="authors">
-            Soohyun Ryu*, <strong>Sohee Kim*</strong>, Eunho Yang
-            <span class="note">(* equal contribution)</span>
-          </p>
-          <p>
-            <strong>🏆 #3 Paper of the Day</strong> on
-            <a class="text-link" href="https://huggingface.co/papers/2609.07064" target="_blank" rel="noopener">
-              Hugging Face Daily Papers
-            </a>.
-          </p>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2609.07064" target="_blank" rel="noopener">Paper ↗</a>
-            <a href="https://huggingface.co/papers/2609.07064" target="_blank" rel="noopener">Hugging Face ↗</a>
+            <a href="https://aclanthology.org/2025.emnlp-main.1092/" target="_blank" rel="noopener">[Paper]</a>
           </div>
         </article>
 
-        <article class="pub-card">
-          <div class="pub-venue">Master’s Thesis · KAIST · 2023</div>
+        <article class="publication">
+          <div class="venue">Under Review</div>
           <h3>
-            <a class="pub-title-link" href="assets/papers/Progressive_Curvature_Encoding_Sohee_Kim.pdf" target="_blank" rel="noopener">
+            <a class="pub-title" href="https://arxiv.org/abs/2609.07064" target="_blank" rel="noopener">
+              SpatialBlock: Enhancing Spatial Intelligence in LVLMs via Synthetic Block-Stacking Problem
+            </a>
+          </h3>
+          <p class="authors">Soohyun Ryu*, <strong>Sohee Kim*</strong>, Eunho Yang <span class="note">(* equal contribution)</span></p>
+          <p class="pub-note"><strong>🏆 #3 Paper of the Day</strong> on <a href="https://huggingface.co/papers/2609.07064" target="_blank" rel="noopener">Hugging Face Daily Papers</a>.</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2609.07064" target="_blank" rel="noopener">[Paper]</a>
+            <a href="https://huggingface.co/papers/2609.07064" target="_blank" rel="noopener">[Hugging Face]</a>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div class="venue">Master’s Thesis · KAIST · 2023</div>
+          <h3>
+            <a class="pub-title" href="assets/papers/Progressive_Curvature_Encoding_Sohee_Kim.pdf" target="_blank" rel="noopener">
               Progressive Curvature Encoding for 3D representation learning
             </a>
           </h3>
           <p class="authors"><strong>Sohee Kim</strong> <span class="note">· Advisor: Prof. Eunho Yang</span></p>
           <div class="pub-links">
-            <a href="assets/papers/Progressive_Curvature_Encoding_Sohee_Kim.pdf" target="_blank" rel="noopener">Thesis PDF ↗</a>
+            <a href="assets/papers/Progressive_Curvature_Encoding_Sohee_Kim.pdf" target="_blank" rel="noopener">[Thesis PDF]</a>
           </div>
         </article>
 
-        <article class="pub-card">
-          <div class="pub-venue">AAIC 2021 · Poster</div>
+        <article class="publication">
+          <div class="venue">AAIC 2021 · Poster</div>
           <h3>Tracing Individual Trajectory of Longitudinal Tau Spreading in Deep Latent Space</h3>
           <p class="authors"><strong>Sohee Kim</strong>, Joon-Kyung Seong, W. Lee, et al.</p>
         </article>
       </section>
 
-      <section id="projects" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Experience</p>
-          <h2>Industry Projects</h2>
-        </div>
+      <hr class="section-rule" />
 
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-date">Jan. 2024 — Nov. 2024</div>
-            <div>
+      <section id="projects">
+        <h2>Industry Projects</h2>
+        <div class="row-list">
+          <article class="row-item">
+            <div class="row-date">Jan. 2024 — Nov. 2024</div>
+            <div class="row-body">
               <h3>Hankook Tire</h3>
-              <p class="item-subtitle">Tire performance ranking prediction</p>
-              <p>Explored listwise, pairwise, and groupwise learning-to-rank approaches under limited per-query data and validated performance with K-fold cross validation.</p>
+              <p class="subtitle">Tire performance ranking prediction</p>
+              <p class="detail">Explored listwise, pairwise, and groupwise learning-to-rank approaches under limited per-query data and validated performance with K-fold cross validation.</p>
             </div>
           </article>
 
-          <article class="timeline-item">
-            <div class="timeline-date">Jun. 2023 — Feb. 2024</div>
-            <div>
+          <article class="row-item">
+            <div class="row-date">Jun. 2023 — Feb. 2024</div>
+            <div class="row-body">
               <h3>Samsung Electronics</h3>
-              <p class="item-subtitle">Few-shot graph property prediction with Graph Neural Networks</p>
-              <p>Jointly leveraged abundant unlabeled data for few-shot graph property prediction.</p>
+              <p class="subtitle">Few-shot graph property prediction with Graph Neural Networks</p>
+              <p class="detail">Jointly leveraged abundant unlabeled data for few-shot graph property prediction.</p>
             </div>
           </article>
 
-          <article class="timeline-item">
-            <div class="timeline-date">Jun. 2022 — May 2023</div>
-            <div>
+          <article class="row-item">
+            <div class="row-date">Jun. 2022 — May 2023</div>
+            <div class="row-body">
               <h3>Hankook Tire</h3>
-              <p class="item-subtitle">Pattern extraction for multi-task regression</p>
-              <p>Studied multimodal learning with tire images and tabular data for few-shot multi-task regression.</p>
+              <p class="subtitle">Pattern extraction for multi-task regression</p>
+              <p class="detail">Studied multimodal learning with tire images and tabular data for few-shot multi-task regression.</p>
             </div>
           </article>
 
-          <article class="timeline-item">
-            <div class="timeline-date">Mar. 2022 — May 2022</div>
-            <div>
+          <article class="row-item">
+            <div class="row-date">Mar. 2022 — May 2022</div>
+            <div class="row-body">
               <h3>YLAB</h3>
-              <p class="item-subtitle">Cartoon-to-real image translation using GANs</p>
-              <p>Worked on cartoon face detection and fine-tuned Reverse Toonification models using style mixing.</p>
+              <p class="subtitle">Cartoon-to-real image translation using GANs</p>
+              <p class="detail">Worked on cartoon face detection and fine-tuned Reverse Toonification models using style mixing.</p>
             </div>
           </article>
         </div>
       </section>
 
-      <section id="education" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Background</p>
-          <h2>Education</h2>
-        </div>
+      <hr class="section-rule" />
 
-        <div class="education-grid">
-          <article class="edu-card">
-            <div class="edu-year">2024 — 2028 (expected)</div>
-            <h3>KAIST</h3>
-            <p>Ph.D. in Artificial Intelligence</p>
-            <span>Graduate School of AI</span>
+      <section id="education">
+        <h2>Education</h2>
+        <div class="row-list">
+          <article class="row-item">
+            <div class="row-date">2024 — 2028 (expected)</div>
+            <div class="row-body">
+              <h3>KAIST</h3>
+              <p class="subtitle">Ph.D. in Artificial Intelligence</p>
+              <p class="detail">Graduate School of AI</p>
+            </div>
           </article>
 
-          <article class="edu-card">
-            <div class="edu-year">2022 — 2024</div>
-            <h3>KAIST</h3>
-            <p>M.S. in Artificial Intelligence</p>
-            <span>Advisor: Prof. Eunho Yang</span>
-            <span>Thesis: Progressive Curvature Encoding for 3D representation learning</span>
+          <article class="row-item">
+            <div class="row-date">2022 — 2024</div>
+            <div class="row-body">
+              <h3>KAIST</h3>
+              <p class="subtitle">M.S. in Artificial Intelligence</p>
+              <p class="detail">Advisor: Prof. Eunho Yang</p>
+              <p class="detail">Thesis: Progressive Curvature Encoding for 3D representation learning</p>
+            </div>
           </article>
 
-          <article class="edu-card">
-            <div class="edu-year">2018 — 2022</div>
-            <h3>Korea University</h3>
-            <p>B.S. in Biomedical Engineering</p>
-            <span>Second major: Software Venture Convergence</span>
-            <span>Dean’s List: Spring 2020, Fall 2020</span>
+          <article class="row-item">
+            <div class="row-date">2018 — 2022</div>
+            <div class="row-body">
+              <h3>Korea University</h3>
+              <p class="subtitle">B.S. in Biomedical Engineering</p>
+              <p class="detail">Second major: Software Venture Convergence</p>
+              <p class="detail">Dean’s List: Spring 2020, Fall 2020</p>
+            </div>
           </article>
         </div>
       </section>
 
-      <section id="awards" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Recognition</p>
-          <h2>Awards</h2>
-        </div>
-        <div class="simple-list">
-          <article>
-            <span class="list-year">2021</span>
-            <div>
+      <hr class="section-rule" />
+
+      <section id="awards">
+        <h2>Awards</h2>
+        <div class="row-list">
+          <article class="row-item">
+            <div class="row-date">2021</div>
+            <div class="row-body">
               <h3>1st Place · 12th Creative Challenger Program (CCP)</h3>
-              <p>Analyzed speech from Alzheimer’s disease patients and extracted meaningful features for diagnosis research.</p>
+              <p class="detail">Analyzed speech from Alzheimer’s disease patients and extracted meaningful features for diagnosis research.</p>
             </div>
           </article>
-          <article>
-            <span class="list-year">2018</span>
-            <div>
+
+          <article class="row-item">
+            <div class="row-date">2018</div>
+            <div class="row-body">
               <h3>2nd Place · Korea University Fencing Championship</h3>
-              <p>Silver medal, women’s foil team match.</p>
+              <p class="detail">Silver medal, women’s foil team match.</p>
             </div>
           </article>
         </div>
       </section>
-      <footer class="site-footer">
-        <p>© <span id="year"></span> Sohee Kim. Built for GitHub Pages.</p>
-        <a href="#about">Back to top ↑</a>
+
+      <footer>
+        <p>© <span id="year"></span> Sohee Kim · Built for GitHub Pages</p>
       </footer>
     </main>
   </div>
 
-  <script src="assets/js/main.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
